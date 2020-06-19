@@ -54,10 +54,10 @@ get_filename() {
   local version="$1"
   local platform="$2"
   local binary_name="$3"
-  local version_short
-  version_short=$(echo "$version" | tr -d "v")
+  # local version_short
+  # version_short=$(echo "$version" | tr -d "v")
 
-  echo "${binary_name}_${version_short}_${platform}.tar.gz"
+  echo "${binary_name}_${platform}.tar.gz"
 }
 
 # https://github.com/derailed/popeye/releases/download/v0.8.6/popeye_Linux_x86_64.tar.gz
