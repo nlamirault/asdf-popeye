@@ -6,7 +6,7 @@
 
 ## Install
 
-```
+```shell
 asdf plugin-add popeye https://github.com/nlamirault/asdf-popeye.git
 ```
 
