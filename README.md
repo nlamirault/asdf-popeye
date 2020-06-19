@@ -1,6 +1,6 @@
 # asdf-popeye
 
-[![Build Status](https://travis-ci.org/nlamirault/asdf-popeye.svg?branch=master)](https://travis-ci.org/nlamirault/asdf-popeye)
+[![Build Status](https://github.com/nlamirault/asdf-popeye/workflows/main/badge.svg)](https://github.com/nlamirault/asdf-popeye/actions)
 
 [popeye](https://github.com/derailed/popeye) plugin for the [asdf](https://github.com/asdf-vm/asdf) version manager.
 
