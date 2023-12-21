@@ -47,7 +47,29 @@ get_binary_path_in_archive() {
 }
 
 get_platform() {
-  echo "$(uname)_x86_64"
+  # echo "$(uname)_x86_64"
+
+  local machine_hardware_name
+  machine_hardware_name=${ASDF_KUBECTL_OVERWRITE_ARCH:-"$(uname -m)"}
+  version_short=$(echo ${version}|sed -e 's/^v//')
+  version_split=( ${version_short//./ } )
+  case "$machine_hardware_name" in
+    'x86_64') local cpu_type="amd64" ;;
+    'aarch64') local cpu_type="arm64" ;;
+    # 'armv7l') local cpu_type="armv7" ;;
+    *) local cpu_type="$machine_hardware_name" ;;
+  esac
+
+  # Work around arch type on filenames after 0.11.2
+  if [ "${cpu_type}" == "amd64" ] && [ ${version_split[0]} -eq 0 ] && [ ${version_split[1]} -le 11 ]; then
+     cpu_type="x86_64"
+     if [ ${version_split[1]} -eq 11 ] && [ ${version_split[2]} -gt 1  ]; then
+        cpu_type="amd64"
+     fi
+  fi
+
+  echo "$(uname)_${cpu_type}"
+
 }
 
 get_filename() {
