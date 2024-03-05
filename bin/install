@@ -51,8 +51,8 @@ get_platform() {
 
   local machine_hardware_name
   machine_hardware_name=${ASDF_KUBECTL_OVERWRITE_ARCH:-"$(uname -m)"}
-  version_short=$(echo ${version}|sed -e 's/^v//')
-  version_split=( ${version_short//./ } )
+  version_short="${version//v/""}"
+  version_split=( "${version_short//./ }" )
   case "$machine_hardware_name" in
     'x86_64') local cpu_type="amd64" ;;
     'aarch64') local cpu_type="arm64" ;;
@@ -61,9 +61,9 @@ get_platform() {
   esac
 
   # Work around arch type on filenames after 0.11.2
-  if [ "${cpu_type}" == "amd64" ] && [ ${version_split[0]} -eq 0 ] && [ ${version_split[1]} -le 11 ]; then
+  if [ "${cpu_type}" == "amd64" ] && [ "${version_split[0]}" -eq 0 ] && [ "${version_split[1]}" -le 11 ]; then
      cpu_type="x86_64"
-     if [ ${version_split[1]} -eq 11 ] && [ ${version_split[2]} -gt 1  ]; then
+     if [ "${version_split[1]}" -eq 11 ] && [ "${version_split[2]}" -gt 1  ]; then
         cpu_type="amd64"
      fi
   fi
