@@ -52,7 +52,8 @@ get_platform() {
   local machine_hardware_name
   machine_hardware_name=${ASDF_KUBECTL_OVERWRITE_ARCH:-"$(uname -m)"}
   version_short="${version//v/""}"
-  version_split=( "${version_short//./ }" )
+  # shellcheck disable=SC2206
+  version_split=( ${version_short//./ } )
   case "$machine_hardware_name" in
     'x86_64') local cpu_type="amd64" ;;
     'aarch64') local cpu_type="arm64" ;;
